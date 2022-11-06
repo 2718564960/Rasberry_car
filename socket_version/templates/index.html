@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+
+<!--<script>-->
+<!--    function directionBtnDown(direction) {-->
+<!--        var url = "/dbd"-->
+<!--        var request = new XMLHttpRequest();-->
+<!--        request.open("POST", url);-->
+<!--        request.send(direction)-->
+<!--    }-->
+<!-- -->
+<!--    function directionBtnUp() {-->
+<!--        var url = "/dbu"-->
+<!--        var request = new XMLHttpRequest();-->
+<!--        request.open("POST", url);-->
+<!--        request.send("S")-->
+<!--    }-->
+<!--</script>-->
+
+<style lang="scss">
+    .defaultStyleConfig {
+        -moz-user-select: none;/*火狐*/
+        -webkit-user-select: none;/*webKit 浏览器*/
+        -ms-user-select: none;/*IE10*/
+        -khtml-user-select: none;/*低版本浏览器*/
+        user-select: none;/*其中 user-select 的参数值 none 表示不能选中文本，而 text 则表示可以选择文本*/
+    }
+</style>
+
+<style type="text/css">
+*{-webkit-touch-callout:none;  /*系统默认菜单被禁用*/   
+    -webkit-user-select:none; /*webkit浏览器*/   
+    -khtml-user-select:none; /*早期浏览器*/   
+    -moz-user-select:none;/*火狐*/   
+    -ms-user-select:none; /*IE10*/   
+    user-select:none;}
+    span.car {
+        position: absolute;
+        margin-top: 30%;
+        height: 480px;   
+    }
+ 
+    span.camera {
+        position: absolute;
+        margin-top: 5%;
+        margin-left: 290px;
+        height: 480px;
+        width: 640px;
+        background-color: blue
+    }
+ 
+    span.camera_control {
+        position: absolute;
+        margin-top: 30%;
+        margin-left: 950px;
+        height: 480px;
+        background-color: blue
+    }
+ 
+ 
+    button.top {
+        position: absolute;
+        height: 50px;
+        width: 90px;
+        margin-left: 90px
+    }
+ 
+    button.left {
+        position: absolute;
+        height: 50px;
+        width: 90px;
+        margin-top: 50px;
+    }
+ 
+    button.right {
+        position: absolute;
+        height: 50px;
+        width: 90px;
+        margin-top: 50px;
+        margin-left: 180px
+    }
+ 
+    button.bottom {
+        position: absolute;
+        height: 50px;
+        width: 90px;
+        margin-top: 100px;
+        margin-left: 90px
+    }
+</style>
+
+  <head>
+    <title>Video Streaming Demonstration</title>
+
+  </head>
+  <body  style="width:640px;height:480px">
+    <h1>Video Streaming Demonstration</h1>
+    <div>
+   <center>
+       <!-- <img src="http://192.168.31.51:8080/?action=stream"/> -->
+    </center>
+    </div>
+    <h1>Control</h1>
+    <button class="top drectionBtn" id="F" onmousedown="directionBtnDown('F')" onmouseup="directionBtnUp()">F</button>
+    <button class="left drectionBtn" id="L" onmousedown="directionBtnDown('L')" onmouseup="directionBtnUp()">L</button>
+    <button class="right drectionBtn" id="R" onmousedown="directionBtnDown('R')" onmouseup="directionBtnUp()">R</button>
+    <button class="bottom drectionBtn" id="B" onmousedown="directionBtnDown('B')" onmouseup="directionBtnUp()">B</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script type="text/javascript" charset="utf-8">
+var socket = io()
+      socket.on('connect', function() {
+          console.log("connet")
+          socket.emit('my event', {data: 'I\'m connected!'});
+      });
+      function directionBtnDown(action){
+        socket.emit('action', {action:action});
+      }
+      function directionBtnUp(){
+        socket.emit('action', {action:'stop'});
+      }
+      
+</script>
+    
+  </body>
+  
+</html>
